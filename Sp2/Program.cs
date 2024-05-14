@@ -1,4 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Sp2.Models;
+using Sp2.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add DbContext Oracle on the project
+builder.Services.AddDbContext<OracleDbContext>(options =>
+{
+    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"));
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
