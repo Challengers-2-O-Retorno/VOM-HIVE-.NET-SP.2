@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Sp2.Models
 {
     [Table("Pay_hist")]
-    public class Payhist
+    public class PayhistModel
     {
         [Key]
         [Column("id_history")]

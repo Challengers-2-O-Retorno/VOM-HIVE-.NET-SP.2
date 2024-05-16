@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sp2.Models
 {
-    public class Campaign
+    public class CampaignModel
     {
         [Key]
         [Column("id_campaing")]
