@@ -13,7 +13,7 @@ namespace Sp2.Models
         [Column("nm_campaing")]
         public string? nm_campaign { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O nome da campanha é obrigatório.")]
         [Column("target")]
         public string? target { get; set; }
 

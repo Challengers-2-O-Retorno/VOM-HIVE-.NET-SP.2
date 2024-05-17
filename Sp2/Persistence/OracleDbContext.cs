@@ -5,6 +5,8 @@ namespace Sp2.Persistence
 {
     public class OracleDbContext : DbContext
     {
+        public DbSet<ProductModel> Product { get; set; }
+
         public DbSet<CampaignModel> Campaign { get; set; }
 
         public DbSet<CompanyModel> Company { get; set; }

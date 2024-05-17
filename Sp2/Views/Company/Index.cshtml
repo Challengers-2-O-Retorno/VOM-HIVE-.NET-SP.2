@@ -33,6 +33,9 @@
                         <td>
                             <div class="btn-group">
                                 <a role="button" class="btn btn-primary active" asp-controller="Profileuser" asp-action="Criar" asp-route-id_company="@company.id_company">Cadastrar Usuário</a>
+                                <a role="button" class="btn btn-primary active" asp-controller="Product" asp-action="Criar" asp-route-id_company="@company.id_company">Cadastrar Campanha</a>
+                            </div>
+                            <div class="btn-group">
                                 <a role="button" class="btn btn-primary active" asp-controller="Company" asp-route-id="@company.id_company" asp-action="Editar">Editar</a>
                                 <a role="button" class="btn btn-danger" asp-controller="Company" asp-route-id="@company.id_company" asp-action="ApagarConfirmacao">Apagar</a>
                             </div>
