@@ -5,10 +5,10 @@ using Sp2.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add DbContext Oracle on the project
+//Add DbContext Oracle on the project
 //builder.Services.AddDbContext<OracleDbContext>(options =>
 //{
-//    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"))
+//    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"));
 //});
 
 builder.Services.AddControllersWithViews();
