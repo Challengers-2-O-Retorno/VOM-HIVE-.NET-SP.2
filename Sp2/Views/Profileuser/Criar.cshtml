@@ -1,0 +1,33 @@
+﻿@model ProfileuserModel
+@{
+    ViewData["Title"] = "Cadastrar Usuário";
+}
+
+<div class="text-center">
+    <h1 class="">Cadastrar usuário</h1>
+    <br />
+</div>
+<form asp-controller="Profileuser" asp-action="Criar" method="post">
+
+    <div class="form-group">
+        <label for="nm_user">Nome do usuário</label>
+        <input type="text" asp-for="nm_user" class="form-control" placeholder="Digite o nome do usuário.">
+    </div>
+    <div class="form-group">
+        <label for="pass_user">Senha do usuário</label>
+        <input type="password" asp-for="pass_user" class="form-control" placeholder="Senha.">
+    </div>
+    <div class="form-group">
+        <label for="permission_user">Permissão do usuário</label>
+        <input type="text" asp-for="permission_user" class="form-control" placeholder="Administrador, membro ou visualizador.">
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <input type="text" asp-for="status" class="form-control" placeholder="Ativo">
+    </div>
+        <input type="hidden" asp-for="id_company" value="@Model.id_company"/>
+        <input type="hidden" asp-for="dt_register"/>
+    <br />
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a class="btn btn-secondary" asp-controller="Profileuser" asp-action="Index" role="button">Voltar</a>
+</form>
