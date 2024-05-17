@@ -12,6 +12,11 @@ namespace Sp2.Repositories
              _bancoContext = oracleDbContext;
         }
 
+        public List<CompanyModel> BuscarTodos()
+        {
+            return _bancoContext.Company.ToList(); 
+        }
+
         public CompanyModel Adicionar(CompanyModel company)
         {
             //Gravar no banco de dados
