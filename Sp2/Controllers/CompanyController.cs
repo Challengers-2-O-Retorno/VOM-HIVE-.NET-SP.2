@@ -19,7 +19,11 @@ namespace Sp2.Controllers
         }
         public IActionResult Criar()
         {
-            return View();
+            var model = new ProfileuserModel
+            {
+                dt_register = DateTime.Now
+            };
+            return View(model);
         }
         public IActionResult Editar()
         {
@@ -33,6 +37,7 @@ namespace Sp2.Controllers
         [HttpPost]
         public IActionResult Criar(CompanyModel company)
         {
+            company.dt_register = DateTime.Now;
             _companyRepository.Adicionar(company);
             return RedirectToAction("Index");
         }
