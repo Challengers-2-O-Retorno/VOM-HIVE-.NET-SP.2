@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OracleDbContext>(o => o.UseOracle(builder.Configuration.GetConnectionString("OracleConnection")));
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IProfileuserRepository,ProfileuserRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
