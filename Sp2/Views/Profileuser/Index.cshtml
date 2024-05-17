@@ -1,0 +1,43 @@
+﻿@model List<ProfileuserModel>
+@{
+    ViewData["Title"] = "Listagem de Usuários";
+}
+
+<div class="text-center">
+    <h1 class="">Listagem de Usuários</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome do Usuário</th>
+                <th scope="col">Id Empresa</th>
+                <th scope="col">dt_register</th>
+                <th scope="col">Permissão</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (ProfileuserModel profile in Model)
+                {
+                    <tr>
+                        <th scope="row">@profile.id_company</th>
+                        <td>@profile.nm_user</td>
+                        <td>@profile.id_company</td>
+                        <td>@profile.dt_register</td>
+                        <td>@profile.permission_user</td>
+                        <td>@profile.status</td>
+                        <td>
+                            <div class="btn-group">
+                                <a role="button" class="btn btn-primary active" asp-controller="Company"  asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-controller="Company" asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
