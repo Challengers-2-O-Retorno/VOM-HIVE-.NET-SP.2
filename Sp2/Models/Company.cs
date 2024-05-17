@@ -27,12 +27,12 @@ namespace Sp2.Models
         public DateTime dt_register { get; set; }
 
         [InverseProperty("Company")]
-        public ICollection<Campaign> Campaigns { get; set; }
+        public ICollection<CampaignModel> Campaigns { get; set; }
 
         [InverseProperty("Company")]
-        public ICollection<Subscriptioncompany> Subscriptionscompanies { get; set; }
+        public ICollection<SubscriptioncompanyModel> Subscriptionscompanies { get; set; }
 
         [InverseProperty("Company")]
-        public ICollection<Profileuser> Profile_users { get; set; }
+        public ICollection<ProfileuserModel> Profile_users { get; set; }
     }
 }

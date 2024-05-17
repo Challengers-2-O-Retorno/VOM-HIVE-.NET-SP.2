@@ -19,6 +19,6 @@ namespace Sp2.Models
         public string? category_product { get; set; }
 
         [InverseProperty("Product")]
-        public ICollection<Campaign> Campaigns { get; set; }
+        public ICollection<CampaignModel> Campaigns { get; set; }
     }
 }

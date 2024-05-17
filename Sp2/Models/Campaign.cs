@@ -32,11 +32,11 @@ namespace Sp2.Models
 
         [ForeignKey("Company")]
         public int id_company { get; set; }
-        public Company Company { get; set; }
+        public CompanyModel Company { get; set; }
 
         [ForeignKey("Product")]
         public int id_product { get; set; }
-        public Product Product { get; set; }
+        public ProductModel Product { get; set; }
     }
 
 }

@@ -27,6 +27,6 @@ namespace Sp2.Models
         public byte[]? nfe { get; set; }
 
         //[InverseProperty("Paymethod")]
-        public ICollection<Paymethod> Pay_method { get; set; }
+        public ICollection<PaymethodModel> Pay_method { get; set; }
     }
 }

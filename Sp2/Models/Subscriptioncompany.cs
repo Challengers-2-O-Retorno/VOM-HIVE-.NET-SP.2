@@ -28,6 +28,6 @@ namespace Sp2.Models
 
         [ForeignKey("Company")]
         public int id_company { get; set; }
-        public Company Company { get; set; }
+        public CompanyModel Company { get; set; }
     }
 }

@@ -15,10 +15,10 @@ namespace Sp2.Models
 
         [ForeignKey("Payhist")]
         public int id_history { get; set; }
-        public virtual Payhist Payhist { get; set; }
+        public virtual PayhistModel Payhist { get; set; }
 
         [ForeignKey("Subscription_company")]
         public int id_sub { get; set; }
-        public virtual Subscriptioncompany Subscription_company { get; set; }
+        public virtual SubscriptioncompanyModel Subscription_company { get; set; }
     }
 }
