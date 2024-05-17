@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<CompanyModel>
+@{
     ViewData["Title"] = "Listagem de Companies";
 }
 
@@ -11,53 +12,33 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">id</th>
+                <th scope="col">Id</th>
                 <th scope="col">Nome da empresa</th>
                 <th scope="col">CNPJ</th>
                 <th scope="col">Email</th>
                 <th scope="col">Data de registro</th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-                <td>31/10/2003</td>
-                <td>
-                    <div class="btn-group">
-                        <a role="button" class="btn btn-primary active" asp-controller="Company" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-danger" asp-controller="Company" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-                <td>31/10/2003</td>
-                <td>
-                    <div class="btn-group">
-                        <a role="button" class="btn btn-primary active" asp-controller="Company" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-danger" asp-controller="Company" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-                <td>31/10/2003</td>
-                <td>
-                    <div class="btn-group">
-                        <a role="button" class="btn btn-primary active" asp-controller="Company" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-danger" asp-controller="Company" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
+            @if (Model != null && Model.Any())
+            {
+                foreach(CompanyModel company in Model)
+                {
+                    <tr>
+                        <th scope="row">@company.id_company</th>
+                        <td>@company.nm_company</td>
+                        <td>@company.email</td>
+                        <td>@company.cnpj</td>
+                        <td>@company.dt_register</td>
+                        <td>
+                            <div class="btn-group">
+                                <a role="button" class="btn btn-primary active" asp-controller="Company" asp-route-id="@company.id_company" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-controller="Company" asp-route-id="@company.id_company" asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 </div>
