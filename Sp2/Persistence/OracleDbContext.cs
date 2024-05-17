@@ -12,6 +12,8 @@ namespace Sp2.Persistence
         public DbSet<PayhistModel> Payhist { get; set; }
 
         public DbSet<PaymethodModel> Paymethod { get; set; }
+
+        public DbSet<ProfileuserModel> ProfileUser { get; set; }
         public OracleDbContext(DbContextOptions<OracleDbContext> options) : base(options)
         {
             
