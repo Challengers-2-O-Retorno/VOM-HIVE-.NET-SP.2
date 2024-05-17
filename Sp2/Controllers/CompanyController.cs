@@ -14,7 +14,8 @@ namespace Sp2.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<CompanyModel> companies = _companyRepository.BuscarTodos();
+            return View(companies);
         }
         public IActionResult Criar()
         {
