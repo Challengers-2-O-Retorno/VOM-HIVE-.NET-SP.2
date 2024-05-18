@@ -16,8 +16,8 @@
 
     <div class="form-group">
         <label for="category_product">Categoria do produto</label>
-        <input type="text" asp-for="category_product" class="form-control" placeholder="Digite a categoria do produto.">
+        <input type="text" asp-for="category_product" class="form-control" asp-route-id_company="" placeholder="Digite a categoria do produto.">
     </div>
-
-    <button type="submit" class="btn btn-primary" asp-route-id_company="@company.id_company">Cadastrar</button>
+    <input type="hidden" name="id_company" value="@ViewBag.id_company"/>
+    <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
 </form>
