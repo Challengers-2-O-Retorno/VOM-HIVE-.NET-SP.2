@@ -23,7 +23,7 @@ namespace Sp2.Controllers
         {
             var model = new CampaignModel
             {
-                id_campaing = id_company,
+                id_company = id_company,
                 id_product = id_product,
                 dt_register = DateTime.Now
             };
@@ -33,6 +33,12 @@ namespace Sp2.Controllers
         public IActionResult Editar()
         {
             return View();
+        }
+        public IActionResult CampaignProduct(CampaignModel camapaign)
+        {
+            camapaign.dt_register = DateTime.Now;
+            _campaignRepository.Adicionar(camapaign);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Apagar()
