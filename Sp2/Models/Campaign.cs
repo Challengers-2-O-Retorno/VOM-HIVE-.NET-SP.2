@@ -30,13 +30,14 @@ namespace Sp2.Models
         [Column("status")]
         public string? status { get; set; }
 
-        [ForeignKey("Company")]
-        public int id_company { get; set; }
-        public CompanyModel Company { get; set; }
-
         [ForeignKey("Product")]
+        [Column("id_product")]
         public int id_product { get; set; }
         public ProductModel Product { get; set; }
-    }
 
+        [ForeignKey("Company")]
+        [Column("id_company")]
+        public int id_company { get; set; }
+        public CompanyModel Company { get; set; }
+    }
 }
