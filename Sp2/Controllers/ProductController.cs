@@ -19,8 +19,10 @@ namespace Sp2.Controllers
             return View(products);
         }
 
-        public IActionResult Criar()
+        [HttpGet]
+        public IActionResult Criar(int id_company)
         {
+            ViewBag.id_company = id_company;
             return View();
         }
 
@@ -35,10 +37,13 @@ namespace Sp2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(ProductModel product)
+        public IActionResult Criar(ProductModel product, int id_company)
         {
             _productRepository.Adicionar(product);
-            return RedirectToAction("Index");
+
+            int id_product = product.id_product;
+
+            return RedirectToAction("Criar", "Campaign", new {id_product = id_product, id_company = id_company});
         }
     }
 }
