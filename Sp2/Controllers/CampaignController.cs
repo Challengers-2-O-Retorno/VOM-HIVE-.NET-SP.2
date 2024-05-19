@@ -2,6 +2,7 @@
 using Sp2.Models;
 using Sp2.Repositories;
 using Sp2.ViewModels;
+using System.Transactions;
 
 namespace Sp2.Controllers
 {
@@ -24,7 +25,7 @@ namespace Sp2.Controllers
 
             foreach (var campaign in campaigns)
             {
-                var product = _productRepository.GetById(campaign.id_product);
+                var product = _productRepository.ListarPorId(campaign.id_product);
                 viewModel.Add(new CampaignWithProductViewModel
                 {
                     Campaign = campaign,
@@ -64,14 +65,9 @@ namespace Sp2.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Apagar()
+        public IActionResult Apagar(int id_campaign, int id_product)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Apagar(int id_campaign)
-        {
+            //_productRepository.Apagar(id_product);
             _campaignRepository.Apagar(id_campaign);
             return RedirectToAction("Index");
         }
