@@ -36,17 +36,18 @@ namespace Sp2.Controllers
             return View(company);
         }
 
-        public IActionResult Apagar()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public IActionResult Apagar(int id_company)
         {
             _companyRepository.Apagar(id_company);
             return RedirectToAction("Index");
         }
+
+        //[HttpPost]
+        //public IActionResult Apagar(int id_company)
+        //{
+        //    _companyRepository.Apagar(id_company);
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpPost]
         public IActionResult Criar(CompanyModel company)
@@ -59,7 +60,6 @@ namespace Sp2.Controllers
         [HttpPost]
         public IActionResult Alterar(CompanyModel company)
         {
-            company.dt_register = DateTime.Now;
             _companyRepository.Atualizar(company);
             return RedirectToAction("Index");
         }
