@@ -1,14 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using Sp2.Models;
 using Sp2.Persistence;
+using Sp2.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add DbContext Oracle on the project
-builder.Services.AddDbContext<OracleDbContext>(options =>
-{
-    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"));
-});
+//Add DbContext Oracle on the project
+//builder.Services.AddDbContext<OracleDbContext>(options =>
+//{
+//    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"));
+//});
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<OracleDbContext>(o => o.UseOracle(builder.Configuration.GetConnectionString("OracleConnection")));
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IProfileuserRepository,ProfileuserRepository>();
+builder.Services.AddScoped<ICampaignRepository,CampaignRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

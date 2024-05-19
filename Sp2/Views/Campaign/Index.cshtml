@@ -1,0 +1,50 @@
+﻿@model List<CampaignWithProductViewModel>
+@using Sp2.ViewModels
+@{
+    ViewData["Title"] = "Listagem de Usuários";
+}
+
+<div class="text-center">
+    <h1 class="">Listagem de Campanhas</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome da campanha</th>
+                <th scope="col">Público alvo</th>
+                <th scope="col">Data de Registro</th>
+                <th scope="col">Detalhes</th>
+                <th scope="col">Status</th>
+                <th scope="col">Nome do Produto</th>
+                <th scope="col">Categoria do Produto</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.Campaign.id_campaign</th>
+                        <td>@item.Campaign.nm_campaign</td>
+                        <td>@item.Campaign.target</td>
+                        <td>@item.Campaign.dt_register</td>
+                        <td>@item.Campaign.details</td>
+                        <td>@item.Campaign.status</td>
+                        <td>@item.Product.nm_product</td>
+                        <td>@item.Product.category_product</td>
+                        <td>
+                            <div class="btn-group">
+                                <a role="button" class="btn btn-primary active" asp-controller="Campaign" asp-action="Editar" asp-route-id_campaign="@item.Campaign.id_campaign">Editar Campanha</a>
+                                <a role="button" class="btn btn-primary active" asp-controller="Product" asp-action="Editar" asp-route-id_product="@item.Product.id_product">Editar Produto</a>
+                                <a role="button" class="btn btn-danger" asp-controller="Campaign" asp-action="ApagarConfirmacao" asp-route-id_campaign="@item.Campaign.id_campaign" asp-route-id_product="@item.Product.id_product">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,14 @@
+﻿@model CompanyModel
+@{
+    ViewData["Title"] = "Confirmação de exclusão";
+}
+
+<div class="text-center">
+    <h3>Realmente deseja apagar a empresa (@Model.nm_company)?</h3>
+</div>
+
+<form asp-controller="Company" asp-action="Apagar" method="post">
+    <input type="hidden" asp-for="id_company" />
+    <button type="submit" class="btn btn-danger btn-block">Confirmar exclusão</button>
+    <a class="btn btn-primary btn-block" role="button" asp-controller="Company" asp-action="Index">Cancelar exclusão</a>
+</form>
