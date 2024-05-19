@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Sp2.Models
 {
     [Table("Product")]
-    public class Product
+    public class ProductModel
     {
         [Key]
         [Column("id_product")]
@@ -19,6 +19,6 @@ namespace Sp2.Models
         public string? category_product { get; set; }
 
         [InverseProperty("Product")]
-        public ICollection<Campaign> Campaigns { get; set; }
+        public ICollection<CampaignModel> Campaigns { get; set; }
     }
 }

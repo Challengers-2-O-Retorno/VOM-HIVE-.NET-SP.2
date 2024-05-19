@@ -1,0 +1,53 @@
+﻿@model List<CompanyModel>
+@{
+    ViewData["Title"] = "Listagem de Companies";
+}
+
+<div class="text-center">
+    <h1 class="">Listagem de Companies</h1>
+    <br />
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Company" asp-action="Criar">Adicionar nova empresa</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome da empresa</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Email</th>
+                <th scope="col">Data de registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach(CompanyModel company in Model)
+                {
+                    <tr>
+                        <th scope="row">@company.id_company</th>
+                        <td>@company.nm_company</td>
+                        <td>@company.cnpj</td>
+                        <td>@company.email</td>
+                        <td>@company.dt_register</td>
+                        <td>
+                            <div class="btn-group">
+                                <a role="button" class="btn btn-primary active" asp-controller="Profileuser" asp-action="Criar" asp-route-id_company="@company.id_company">Cadastrar Usuário</a>
+                                <a role="button" class="btn btn-primary active" asp-controller="Product" asp-action="Criar" asp-route-id_company="@company.id_company">Cadastrar Campanha</a>
+                            </div>
+                            <div class="btn-group">
+                                <a role="button" class="btn btn-primary active" asp-controller="Company" asp-route-id_company="@company.id_company" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-controller="Company" asp-route-id_company="@company.id_company" asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <a role="button" class="btn btn-primary active" asp-controller="Profileuser" asp-action="Index">Visualizar usuários cadastrados</a>
+    </div><div class="btn-group">
+        <a role="button" class="btn btn-primary active" asp-controller="Campaign" asp-action="Index">Visualizar campanhas cadastradas</a>
+    </div>
+</div>

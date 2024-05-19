@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Sp2.Models
 {
     [Table("Profile_user")]
-    public class Profileuser
+    public class ProfileuserModel
     {
         [Key]
         [Column("id_user")]
@@ -32,6 +32,6 @@ namespace Sp2.Models
 
         [ForeignKey("Company")]
         public int id_company { get; set; }
-        public Company Company { get; set; }
+        public CompanyModel Company { get; set; }
     }
 }
