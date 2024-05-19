@@ -26,9 +26,16 @@ namespace Sp2.Controllers
             return View();
         }
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id_product)
         {
-            return View();
+            ProductModel product = _productRepository.ListarPorId(id_product);
+            return View(product);
+        }
+
+        public IActionResult ApagarConfirmacao(int id_product)
+        {
+            ProductModel product = _productRepository.ListarPorId(id_product);
+            return View(product);
         }
 
         public IActionResult Apagar()
@@ -44,6 +51,20 @@ namespace Sp2.Controllers
             int id_product = product.id_product;
 
             return RedirectToAction("Criar", "Campaign", new {id_product = id_product, id_company = id_company});
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(ProductModel product)
+        {
+            _productRepository.Atualizar(product);
+            return RedirectToAction("Index", "Campaign");
+        }
+
+        [HttpPost]
+        public IActionResult Apagar(int id_product)
+        {
+            _productRepository.Apagar(id_product);
+            return RedirectToAction("Index", "Campaign");
         }
     }
 }
