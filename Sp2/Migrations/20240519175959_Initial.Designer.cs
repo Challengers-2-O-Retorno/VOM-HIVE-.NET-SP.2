@@ -12,7 +12,7 @@ using Sp2.Persistence;
 namespace Sp2.Migrations
 {
     [DbContext(typeof(OracleDbContext))]
-    [Migration("20240519160002_Initial")]
+    [Migration("20240519175959_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -27,12 +27,12 @@ namespace Sp2.Migrations
 
             modelBuilder.Entity("Sp2.Models.CampaignModel", b =>
                 {
-                    b.Property<int>("id_campaing")
+                    b.Property<int>("id_campaign")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)")
-                        .HasColumnName("id_campaing");
+                        .HasColumnName("id_campaign");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_campaing"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_campaign"));
 
                     b.Property<string>("details")
                         .IsRequired()
@@ -66,7 +66,7 @@ namespace Sp2.Migrations
                         .HasColumnType("NVARCHAR2(2000)")
                         .HasColumnName("target");
 
-                    b.HasKey("id_campaing");
+                    b.HasKey("id_campaign");
 
                     b.HasIndex("id_company");
 

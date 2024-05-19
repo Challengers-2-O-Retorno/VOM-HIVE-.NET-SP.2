@@ -69,7 +69,7 @@ namespace Sp2.Migrations
                 name: "Campaign",
                 columns: table => new
                 {
-                    id_campaing = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    id_campaign = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     nm_campaing = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     target = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
@@ -81,7 +81,7 @@ namespace Sp2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Campaign", x => x.id_campaing);
+                    table.PrimaryKey("PK_Campaign", x => x.id_campaign);
                     table.ForeignKey(
                         name: "FK_Campaign_Company_id_company",
                         column: x => x.id_company,
