@@ -6,6 +6,9 @@
 <div class="text-center">
     <h3>Realmente deseja apagar a campanha (@Model.nm_campaign)?</h3>
 </div>
-
-<a class="btn btn-primary btn-block" role="button" asp-controller="Campaign" asp-action="Index">Cancelar exclusão</a>
-<a class="btn btn-danger btn-block" role="button" asp-controller="Campaign" asp-route-id_campaign="@Model.id_campaing" asp-action="Apagar">Confirmar exclusão</a>
+<form asp-controller="Campaign" asp-action="Apagar" method="post">
+    <input type="hidden" asp-for="id_product" />
+    <input type="hidden" asp-for="id_campaign" />
+    <a class="btn btn-primary btn-block" role="button" asp-controller="Campaign" asp-action="Index">Cancelar exclusão</a>
+    <a class="btn btn-danger btn-block" role="button" asp-controller="Campaign" asp-route-id_campaign="@Model.id_campaign" asp-route-id_product="@Model.id_product" asp-action="Apagar">Confirmar exclusão</a>
+</form>
