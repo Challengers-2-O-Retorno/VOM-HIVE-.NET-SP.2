@@ -6,8 +6,8 @@ namespace Sp2.Models
     public class CampaignModel
     {
         [Key]
-        [Column("id_campaing")]
-        public int id_campaing { get; set; }
+        [Column("id_campaign")]
+        public int id_campaign { get; set; }
 
         [Required]
         [Column("nm_campaing")]
