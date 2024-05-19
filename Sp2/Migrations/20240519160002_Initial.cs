@@ -28,22 +28,6 @@ namespace Sp2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pay_hist",
-                columns: table => new
-                {
-                    id_history = table.Column<int>(type: "NUMBER(10)", nullable: false)
-                        .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
-                    value_pay = table.Column<decimal>(type: "DECIMAL(18, 2)", nullable: false),
-                    dt_payment = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
-                    dt_due = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
-                    nfe = table.Column<byte[]>(type: "RAW(2000)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pay_hist", x => x.id_history);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
@@ -82,29 +66,6 @@ namespace Sp2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Subscription_company",
-                columns: table => new
-                {
-                    id_sub = table.Column<int>(type: "NUMBER(10)", nullable: false)
-                        .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
-                    value_sub = table.Column<decimal>(type: "DECIMAL(18, 2)", nullable: false),
-                    dt_start = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
-                    dt_end = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
-                    status = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    id_company = table.Column<int>(type: "NUMBER(10)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subscription_company", x => x.id_sub);
-                    table.ForeignKey(
-                        name: "FK_Subscription_company_Company_id_company",
-                        column: x => x.id_company,
-                        principalTable: "Company",
-                        principalColumn: "id_company",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Campaign",
                 columns: table => new
                 {
@@ -115,8 +76,8 @@ namespace Sp2.Migrations
                     dt_register = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
                     details = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     status = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    id_company = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    id_product = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    id_product = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    id_company = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -135,33 +96,6 @@ namespace Sp2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Pay_method",
-                columns: table => new
-                {
-                    id_method = table.Column<int>(type: "NUMBER(10)", nullable: false)
-                        .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
-                    nm_method = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    id_history = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    id_sub = table.Column<int>(type: "NUMBER(10)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pay_method", x => x.id_method);
-                    table.ForeignKey(
-                        name: "FK_Pay_method_Pay_hist_id_history",
-                        column: x => x.id_history,
-                        principalTable: "Pay_hist",
-                        principalColumn: "id_history",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pay_method_Subscription_company_id_sub",
-                        column: x => x.id_sub,
-                        principalTable: "Subscription_company",
-                        principalColumn: "id_sub",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Campaign_id_company",
                 table: "Campaign",
@@ -173,23 +107,8 @@ namespace Sp2.Migrations
                 column: "id_product");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pay_method_id_history",
-                table: "Pay_method",
-                column: "id_history");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pay_method_id_sub",
-                table: "Pay_method",
-                column: "id_sub");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Profile_user_id_company",
                 table: "Profile_user",
-                column: "id_company");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Subscription_company_id_company",
-                table: "Subscription_company",
                 column: "id_company");
         }
 
@@ -200,19 +119,10 @@ namespace Sp2.Migrations
                 name: "Campaign");
 
             migrationBuilder.DropTable(
-                name: "Pay_method");
-
-            migrationBuilder.DropTable(
                 name: "Profile_user");
 
             migrationBuilder.DropTable(
                 name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "Pay_hist");
-
-            migrationBuilder.DropTable(
-                name: "Subscription_company");
 
             migrationBuilder.DropTable(
                 name: "Company");

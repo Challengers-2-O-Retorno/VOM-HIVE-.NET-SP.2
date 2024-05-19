@@ -12,7 +12,7 @@ using Sp2.Persistence;
 namespace Sp2.Migrations
 {
     [DbContext(typeof(OracleDbContext))]
-    [Migration("20240514230027_Initial")]
+    [Migration("20240519160002_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Sp2.Migrations
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Sp2.Models.Campaign", b =>
+            modelBuilder.Entity("Sp2.Models.CampaignModel", b =>
                 {
                     b.Property<int>("id_campaing")
                         .ValueGeneratedOnAdd()
@@ -44,10 +44,12 @@ namespace Sp2.Migrations
                         .HasColumnName("dt_register");
 
                     b.Property<int>("id_company")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("NUMBER(10)")
+                        .HasColumnName("id_company");
 
                     b.Property<int>("id_product")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("NUMBER(10)")
+                        .HasColumnName("id_product");
 
                     b.Property<string>("nm_campaign")
                         .IsRequired()
@@ -73,7 +75,7 @@ namespace Sp2.Migrations
                     b.ToTable("Campaign");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Company", b =>
+            modelBuilder.Entity("Sp2.Models.CompanyModel", b =>
                 {
                     b.Property<int>("id_company")
                         .ValueGeneratedOnAdd()
@@ -106,65 +108,7 @@ namespace Sp2.Migrations
                     b.ToTable("Company");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Payhist", b =>
-                {
-                    b.Property<int>("id_history")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)")
-                        .HasColumnName("id_history");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_history"));
-
-                    b.Property<DateTime>("dt_due")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("dt_due");
-
-                    b.Property<DateTime>("dt_payment")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("dt_payment");
-
-                    b.Property<byte[]>("nfe")
-                        .IsRequired()
-                        .HasColumnType("RAW(2000)")
-                        .HasColumnName("nfe");
-
-                    b.Property<decimal>("value_pay")
-                        .HasColumnType("DECIMAL(18, 2)")
-                        .HasColumnName("value_pay");
-
-                    b.HasKey("id_history");
-
-                    b.ToTable("Pay_hist");
-                });
-
-            modelBuilder.Entity("Sp2.Models.Paymethod", b =>
-                {
-                    b.Property<int>("id_method")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_method"));
-
-                    b.Property<int>("id_history")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("id_sub")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("nm_method")
-                        .HasColumnType("NUMBER(10)")
-                        .HasColumnName("nm_method");
-
-                    b.HasKey("id_method");
-
-                    b.HasIndex("id_history");
-
-                    b.HasIndex("id_sub");
-
-                    b.ToTable("Pay_method");
-                });
-
-            modelBuilder.Entity("Sp2.Models.Product", b =>
+            modelBuilder.Entity("Sp2.Models.ProductModel", b =>
                 {
                     b.Property<int>("id_product")
                         .ValueGeneratedOnAdd()
@@ -188,7 +132,7 @@ namespace Sp2.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Profileuser", b =>
+            modelBuilder.Entity("Sp2.Models.ProfileuserModel", b =>
                 {
                     b.Property<int>("id_user")
                         .ValueGeneratedOnAdd()
@@ -231,51 +175,15 @@ namespace Sp2.Migrations
                     b.ToTable("Profile_user");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Subscriptioncompany", b =>
+            modelBuilder.Entity("Sp2.Models.CampaignModel", b =>
                 {
-                    b.Property<int>("id_sub")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)")
-                        .HasColumnName("id_sub");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_sub"));
-
-                    b.Property<DateTime>("dt_end")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("dt_end");
-
-                    b.Property<DateTime>("dt_start")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("dt_start");
-
-                    b.Property<int>("id_company")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("status");
-
-                    b.Property<decimal>("value_sub")
-                        .HasColumnType("DECIMAL(18, 2)")
-                        .HasColumnName("value_sub");
-
-                    b.HasKey("id_sub");
-
-                    b.HasIndex("id_company");
-
-                    b.ToTable("Subscription_company");
-                });
-
-            modelBuilder.Entity("Sp2.Models.Campaign", b =>
-                {
-                    b.HasOne("Sp2.Models.Company", "Company")
+                    b.HasOne("Sp2.Models.CompanyModel", "Company")
                         .WithMany("Campaigns")
                         .HasForeignKey("id_company")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sp2.Models.Product", "Product")
+                    b.HasOne("Sp2.Models.ProductModel", "Product")
                         .WithMany("Campaigns")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -286,28 +194,9 @@ namespace Sp2.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Paymethod", b =>
+            modelBuilder.Entity("Sp2.Models.ProfileuserModel", b =>
                 {
-                    b.HasOne("Sp2.Models.Payhist", "Payhist")
-                        .WithMany("Pay_method")
-                        .HasForeignKey("id_history")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sp2.Models.Subscriptioncompany", "Subscription_company")
-                        .WithMany()
-                        .HasForeignKey("id_sub")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Payhist");
-
-                    b.Navigation("Subscription_company");
-                });
-
-            modelBuilder.Entity("Sp2.Models.Profileuser", b =>
-                {
-                    b.HasOne("Sp2.Models.Company", "Company")
+                    b.HasOne("Sp2.Models.CompanyModel", "Company")
                         .WithMany("Profile_users")
                         .HasForeignKey("id_company")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -316,32 +205,14 @@ namespace Sp2.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Subscriptioncompany", b =>
-                {
-                    b.HasOne("Sp2.Models.Company", "Company")
-                        .WithMany("Subscriptionscompanies")
-                        .HasForeignKey("id_company")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("Sp2.Models.Company", b =>
+            modelBuilder.Entity("Sp2.Models.CompanyModel", b =>
                 {
                     b.Navigation("Campaigns");
 
                     b.Navigation("Profile_users");
-
-                    b.Navigation("Subscriptionscompanies");
                 });
 
-            modelBuilder.Entity("Sp2.Models.Payhist", b =>
-                {
-                    b.Navigation("Pay_method");
-                });
-
-            modelBuilder.Entity("Sp2.Models.Product", b =>
+            modelBuilder.Entity("Sp2.Models.ProductModel", b =>
                 {
                     b.Navigation("Campaigns");
                 });
