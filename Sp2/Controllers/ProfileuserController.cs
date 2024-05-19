@@ -27,13 +27,22 @@ namespace Sp2.Controllers
             };
             return View(model);
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id_user)
         {
-            return View();
+            ProfileuserModel profile = _profileRepository.ListarPorId(id_user);
+            return View(profile);
         }
-        public IActionResult Apagar()
+
+        public IActionResult ApagarConfirmacao(int id_user)
         {
-            return View();
+            ProfileuserModel profile = _profileRepository.ListarPorId(id_user);
+            return View(profile);
+        }
+
+        public IActionResult Apagar(int id_user)
+        {
+            _profileRepository.Apagar(id_user);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -41,6 +50,11 @@ namespace Sp2.Controllers
         {
             profile.dt_register = DateTime.Now;
             _profileRepository.Adicionar(profile);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Alterar(ProfileuserModel profile)
+        {
+            _profileRepository.Atualizar(profile);
             return RedirectToAction("Index");
         }
     }
