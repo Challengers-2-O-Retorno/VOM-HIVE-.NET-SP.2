@@ -13,6 +13,11 @@ namespace Sp2.Repositories
             _bancoContext = oracleDbContext;
         }
 
+        public ProductModel ListarPorId(int id_product)
+        {
+            return _bancoContext.Product.FirstOrDefault(p => p.id_product == id_product);
+        }
+
         public List<ProductModel> BuscarTodos()
         {
             return _bancoContext.Product.ToList();
@@ -24,9 +29,30 @@ namespace Sp2.Repositories
             _bancoContext.SaveChanges();
             return product;
         }
-        public ProductModel GetById(int id_product)
+
+        public ProductModel Atualizar(ProductModel product)
         {
-            return _bancoContext.Product.FirstOrDefault(p => p.id_product == id_product);
+            ProductModel productDb = ListarPorId(product.id_product);
+
+            if (productDb == null) throw new System.Exception("Houve um erro ao atualizar o produto");
+            
+            productDb.nm_product = product.nm_product;
+            productDb.category_product = product.category_product;
+
+            _bancoContext.Product.Update(productDb);
+            _bancoContext.SaveChanges();
+            return productDb;
+        }
+
+        public bool Apagar(int id_product)
+        {
+            ProductModel productDb = ListarPorId(id_product);
+
+            if (productDb == null) throw new System.Exception("Produto não encontrado!");
+
+            _bancoContext.Product.Remove(productDb);
+            _bancoContext.SaveChanges();
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Sp2.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Sp2.Models;
 using Sp2.Persistence;
 
 namespace Sp2.Repositories
@@ -6,15 +7,17 @@ namespace Sp2.Repositories
     public class CampaignRepository : ICampaignRepository
     {
         private readonly OracleDbContext _bancoContext;
+        private readonly IProductRepository _productRepository;
 
-        public CampaignRepository(OracleDbContext oracleDbContext)
+        public CampaignRepository(OracleDbContext oracleDbContext, IProductRepository productRepository)
         {
             _bancoContext = oracleDbContext;
+            _productRepository = productRepository;
         }
 
         public CampaignModel ListarPorId(int id_campaign)
         {
-            return _bancoContext.Campaign.FirstOrDefault(x => x.id_campaing == id_campaign);
+            return _bancoContext.Campaign.FirstOrDefault(x => x.id_campaign == id_campaign);
         }
 
         public List<CampaignModel> BuscarTodos()
@@ -30,7 +33,7 @@ namespace Sp2.Repositories
         }
         public CampaignModel Atualizar(CampaignModel campaign)
         {
-            CampaignModel campaignDb = ListarPorId(campaign.id_campaing);
+            CampaignModel campaignDb = ListarPorId(campaign.id_campaign);
 
             if (campaignDb == null) throw new System.Exception("Houve um erro na atualização da Campanha!");
 
@@ -48,11 +51,16 @@ namespace Sp2.Repositories
         {
             CampaignModel campaignDb = ListarPorId(id_campaign);
 
-            if (campaignDb == null) throw new System.Exception("Houve um erro na exclusão da Campanha!");
+            if (campaignDb == null)
+            {
+                throw new System.Exception("Campanha não encontrada!");
+            }
 
             _bancoContext.Campaign.Remove(campaignDb);
             _bancoContext.SaveChanges();
+
             return true;
         }
+
     }
 }
