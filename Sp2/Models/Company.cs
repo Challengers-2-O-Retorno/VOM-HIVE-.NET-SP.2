@@ -30,9 +30,6 @@ namespace Sp2.Models
         public ICollection<CampaignModel> Campaigns { get; set; }
 
         [InverseProperty("Company")]
-        public ICollection<SubscriptioncompanyModel> Subscriptionscompanies { get; set; }
-
-        [InverseProperty("Company")]
         public ICollection<ProfileuserModel> Profile_users { get; set; }
     }
 }
