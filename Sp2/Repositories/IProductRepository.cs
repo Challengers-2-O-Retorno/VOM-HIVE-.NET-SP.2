@@ -6,5 +6,6 @@ namespace Sp2.Repositories
     {
         List<ProductModel> BuscarTodos();
         ProductModel Adicionar(ProductModel product);
+        ProductModel GetById(int id_product);
     }
 }
